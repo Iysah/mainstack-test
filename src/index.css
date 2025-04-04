@@ -2,9 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Degular';
+  src: url('./assets/fonts/Degular-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: url('./assets/fonts/Degular-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Degular';
+  src: url('./assets/fonts/Degular-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 @layer base {
   body {
     @apply bg-white text-gray-900 antialiased;
+    font-family: 'Degular', sans-serif;
   }
 }
 
@@ -19,6 +41,6 @@
     @apply bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors;
   }
   .card {
-    @apply bg-white rounded-lg shadow-sm p-6;
+    @apply rounded-lg p-4;
   }
 }

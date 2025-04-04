@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { Download, Filter, Info } from 'lucide-react';
+import { ChevronDown, Download, Filter, Info } from 'lucide-react';
+import DatePicker from './DatePicker';
+import MultiSelect from './MultiSelect';
 import { getUser, getWallet, getTransactions, type User, type Wallet, type Transaction } from '../services/api';
 
 const Dashboard = () => {
@@ -9,8 +11,51 @@ const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [wallet, setWallet] = useState<Wallet | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [selectedTransactionTypes, setSelectedTransactionTypes] = useState<string[]>([]);
+  const [selectedTransactionStatus, setSelectedTransactionStatus] = useState<string[]>([]);
+
+  const applyFilters = () => {
+    let filtered = [...transactions];
+
+    // Apply date range filter
+    if (startDate && endDate) {
+      filtered = filtered.filter(transaction => {
+        const transactionDate = new Date(transaction.date);
+        return transactionDate >= startDate && transactionDate <= endDate;
+      });
+    }
+
+    // Apply transaction type filter
+    if (selectedTransactionTypes.length > 0) {
+      filtered = filtered.filter(transaction =>
+        selectedTransactionTypes.includes(transaction.type)
+      );
+    }
+
+    // Apply status filter
+    if (selectedTransactionStatus.length > 0) {
+      filtered = filtered.filter(transaction =>
+        selectedTransactionStatus.includes(transaction.status)
+      );
+    }
+
+    setFilteredTransactions(filtered);
+    setIsFilterOpen(false);
+  };
+
+  const clearFilters = () => {
+    setStartDate(null);
+    setEndDate(null);
+    setSelectedTransactionTypes([]);
+    setSelectedTransactionStatus([]);
+    setFilteredTransactions(transactions);
+    setIsFilterOpen(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +68,7 @@ const Dashboard = () => {
         setUser(userData);
         setWallet(walletData);
         setTransactions(transactionsData);
+        setFilteredTransactions(transactionsData);
       } catch (err) {
         setError('Failed to fetch data. Please try again later.');
       } finally {
@@ -70,7 +116,7 @@ const Dashboard = () => {
             </ResponsiveContainer>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="">
           <div className="card">
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-600 font-normal leading-[16px] mb-4">Ledger Balance</div>
@@ -107,67 +153,121 @@ const Dashboard = () => {
       </div>
 
       <div className="card">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 pb-4 border-b">
           <div>
-            <h2 className="text-xl font-semibold">{transactions.length} Transactions</h2>
+            <h2 className="text-xl font-semibold">{filteredTransactions.length} Transactions</h2>
             <p className="text-sm text-gray-600">Your recent transactions</p>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative">
               <button 
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-4 py-2 border rounded-full bg-[#EFF1F6]"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#EFF1F6]"
               >
                 Filter
-                <Filter size={16} />
+                <ChevronDown size={16} />
               </button>
               {isFilterOpen && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-4"
-                >
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-medium">Date Range</div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <input type="date" className="w-full rounded-lg border-gray-300" />
-                        <input type="date" className="w-full rounded-lg border-gray-300" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-medium mb-2">Transaction Type</div>
-                      <select className="w-full rounded-lg border-gray-300">
-                        <option>Store Transactions</option>
-                        <option>Get Tipped</option>
-                        <option>Withdrawals</option>
-                        <option>Chargebacks</option>
-                        <option>Cashbacks</option>
-                      </select>
-                    </div>
-                    <div>
-                      <div className="font-medium mb-2">Transaction Status</div>
-                      <select className="w-full rounded-lg border-gray-300">
-                        <option>Successful</option>
-                        <option>Pending</option>
-                        <option>Failed</option>
-                      </select>
-                    </div>
-                    <div className="flex items-center gap-2 pt-2">
-                      <button className="flex-1 px-4 py-2 border rounded-lg hover:bg-gray-50">
-                        Clear
-                      </button>
-                      <button className="flex-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-500">
-                        Apply
+                <>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.5 }}
+                    className="fixed inset-0 bg-black"
+                    onClick={() => setIsFilterOpen(false)}
+                  />
+                  <motion.div 
+                    initial={{ x: "100%" }}
+                    animate={{ x: 0 }}
+                    transition={{ type: "spring", damping: 20 }}
+                    className="fixed top-5 right-5 h-[95vh] w-[520px] rounded-lg bg-white shadow-lg p-6 "
+                  >
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-semibold">Filter</h2>
+                      <button onClick={() => setIsFilterOpen(false)} className="text-gray-400 hover:text-gray-600">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
                       </button>
                     </div>
-                  </div>
-                </motion.div>
+                    <div className="flex gap-2 mb-6 overflow-x-auto">
+                      <button className="px-4 py-2 text-sm rounded-full border hover:bg-gray-50 whitespace-nowrap">Today</button>
+                      <button className="px-4 py-2 text-sm rounded-full border hover:bg-gray-50 whitespace-nowrap">Last 7 days</button>
+                      <button className="px-4 py-2 text-sm rounded-full border hover:bg-gray-50 whitespace-nowrap">This month</button>
+                      <button className="px-4 py-2 text-sm rounded-full border hover:bg-gray-50 whitespace-nowrap">Last 3 months</button>
+                    </div>
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-base font-semibold leading-[24px] mb-4">Date Range</h3>
+                        <div className="grid grid-cols-2 gap-3">
+                          <DatePicker
+                            value={startDate}
+                            onChange={setStartDate}
+                            placeholder="17 Jul 2025"
+                            isStart={false}
+                          />
+                          <DatePicker
+                            value={endDate}
+                            onChange={setEndDate}
+                            placeholder="17 Aug 2025"
+                            isStart={false}
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-base font-semibold leading-[24px] mb-4">Transaction Type</h3>
+                        <div className="relative">
+                          <MultiSelect
+                            options={[
+                              "Store Transactions",
+                              "Get Tipped",
+                              "Withdrawals",
+                              "Chargebacks",
+                              "Cashbacks",
+                              "Refer & Earn"
+                            ]}
+                            value={selectedTransactionTypes}
+                            onChange={setSelectedTransactionTypes}
+                            placeholder="Store Transactions, Get Tipped, Withdrawals, Chargebacks, Cash..."
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-base font-semibold leading-[24px] mb-4">Transaction Status</h3>
+                        <div className="relative">
+                          <MultiSelect
+                            options={[
+                              "Successful",
+                              "Pending",
+                              "Failed"
+                            ]}
+                            value={selectedTransactionStatus}
+                            onChange={setSelectedTransactionStatus}
+                            placeholder="Successful, Pending, Failed"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="fixed w-[450px] bottom-6 p-6 bg-white">
+                      <div className="flex items-center gap-3">
+                        <button 
+                          onClick={clearFilters}
+                          className="flex-1 px-6 py-3 border rounded-full hover:bg-gray-50"
+                        >
+                          Clear
+                        </button>
+                        <button 
+                          onClick={applyFilters}
+                          className="flex-1 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-900"
+                        >
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </>
               )}
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 border rounded-full bg-[#EFF1F6]">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#EFF1F6]">
               Export list
               <Download size={16} />
             </button>
@@ -175,7 +275,7 @@ const Dashboard = () => {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
-            <tbody className="divide-y">
+            <tbody className="">
               {isLoading ? (
                 <tr>
                   <td colSpan={2} className="py-4 text-center">Loading transactions...</td>
@@ -188,7 +288,26 @@ const Dashboard = () => {
                 <tr>
                   <td colSpan={2} className="py-4 text-center">No transactions found</td>
                 </tr>
-              ) : transactions.map((transaction) => (
+              ) : filteredTransactions.length === 0 ? (
+                <tr>
+                  <td colSpan={2} className="py-12 text-center">
+                    <div className="flex flex-col items-center justify-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-[#EFF1F6] flex items-center justify-center">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path d="M8 17H16M8 17V11M8 17L4 5H20L16 17M8 11H16M8 11L6.5 7M16 11L17.5 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-lg font-semibold mb-1">No matching transaction found</h3>
+                        <p className="text-sm text-gray-600">Change your filters to see more results, or add a new product.</p>
+                      </div>
+                      <button onClick={clearFilters} className="px-6 py-3 bg-[#EFF1F6] rounded-full text-sm">
+                        Clear Filter
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ) : filteredTransactions.map((transaction) => (
                 <tr key={transaction.id} className="group hover:bg-gray-50">
                   <td className="py-4">
                     <div className="flex items-center gap-3">
@@ -210,8 +329,14 @@ const Dashboard = () => {
                     </div>
                   </td>
                   <td className="py-4 text-right">
-                    <h3 className="font-bold text-base ">USD {transaction.amount.toFixed(2)}</h3>
-                    <div className="text-sm text-gray-600">{transaction.date}</div>
+                    <h3 className="font-bold text-base ">USD {transaction?.amount.toFixed(2)}</h3>
+                    <div className="text-sm text-gray-600">
+                      {new Date(transaction?.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </div>
                   </td>
                 </tr>
               ))}

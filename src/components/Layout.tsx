@@ -18,7 +18,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="fixed top-8 left-10 right-10 bg-white shadow-md rounded-full z-10">
+      <header className="fixed top-10 left-10 right-10 bg-white shadow-md rounded-full ">
         <div className="flex items-center justify-between px-8 py-4">
             <div className="text-2xl font-bold">
                 <MainStackLogo />
