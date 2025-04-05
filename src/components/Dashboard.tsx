@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { ChevronDown, Download, Filter, Info } from 'lucide-react';
+import { ChevronDown, Download, Filter, Info, MoveDownLeft, MoveUpRight, Receipt } from 'lucide-react';
 import DatePicker from './DatePicker';
 import MultiSelect from './MultiSelect';
 import { getUser, getWallet, getTransactions, type User, type Wallet, type Transaction } from '../services/api';
+import { ReceiptIcon } from '../assets/icons';
 
 const Dashboard = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -83,12 +84,12 @@ const Dashboard = () => {
     <div className="max-w-7xl mx-auto space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="card md:col-span-2">
-          <div className="flex justify-between items-start mb-6">
+          <div className="flex justify-start items-center mb-6 gap-[64px]">
             <div>
-              <div className="text-sm text-gray-600 mb-[8px]">Available Balance</div>
-              <div className="text-[36px] font-bold tracking-[-1.5px] mt-1">
+              <p className="text-sm text-gray-600 mb-[10px]">Available Balance</p>
+              <h3 className="text-[36px] font-bold tracking-[-1.5px] mt-1">
                 {isLoading ? 'Loading...' : wallet ? `USD ${wallet?.balance.toFixed(2)}` : 'N/A'}
-              </div>
+              </h3>
             </div>
             <button className="btn-primary">Withdraw</button>
           </div>
@@ -162,10 +163,10 @@ const Dashboard = () => {
             <div className="relative">
               <button 
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#EFF1F6]"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#EFF1F6] font-semibold"
               >
                 Filter
-                <ChevronDown size={16} />
+                <ChevronDown size={18} />
               </button>
               {isFilterOpen && (
                 <>
@@ -267,9 +268,9 @@ const Dashboard = () => {
                 </>
               )}
             </div>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#EFF1F6]">
+            <button className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#EFF1F6] font-semibold">
               Export list
-              <Download size={16} />
+              <Download size={18} color='#131316' />
             </button>
           </div>
         </div>
@@ -290,15 +291,13 @@ const Dashboard = () => {
                 </tr>
               ) : filteredTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={2} className="py-12 text-center">
-                    <div className="flex flex-col items-center justify-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[#EFF1F6] flex items-center justify-center">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M8 17H16M8 17V11M8 17L4 5H20L16 17M8 11H16M8 11L6.5 7M16 11L17.5 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                  <td colSpan={2} className="py-12 text-start">
+                    <div className="flex flex-col justify-start items-start gap-4">
+                      <div className="w-12 h-12 rounded-lg bg-[#EFF1F6] flex items-center justify-center">
+                        <ReceiptIcon />
                       </div>
-                      <div className="text-center">
-                        <h3 className="text-lg font-semibold mb-1">No matching transaction found</h3>
+                      <div className="text-start">
+                        <h3 className="text-lg font-semibold mb-1">No matching transaction found for the selected filter</h3>
                         <p className="text-sm text-gray-600">Change your filters to see more results, or add a new product.</p>
                       </div>
                       <button onClick={clearFilters} className="px-6 py-3 bg-[#EFF1F6] rounded-full text-sm">
@@ -313,13 +312,9 @@ const Dashboard = () => {
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center ${transaction?.type === 'deposit' ? 'bg-green-100' : 'bg-orange-100'}`}>
                         {transaction?.type === 'deposit' ? (
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                          <MoveDownLeft size={16} color='#075132cf' />
                         ) : (
-                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M8 4V8M8 12H8.01M15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8Z" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                          <MoveUpRight size={18} color='#961100cc' />
                         )}
                       </div>
                       <div>

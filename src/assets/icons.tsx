@@ -282,4 +282,322 @@ import * as React from "react"
             </g>
           </svg>
         )
-      }
+    }
+
+    export function ReceiptIcon(props: any) {
+      return (
+        <svg
+          width={24}
+          height={24}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <mask
+            id="a"
+            style={{
+              maskType: "alpha"
+            }}
+            maskUnits="userSpaceOnUse"
+            x={0}
+            y={0}
+            width={24}
+            height={24}
+          >
+            <path fill="#D9D9D9" d="M0 0H24V24H0z" />
+          </mask>
+          <g mask="url(#a)">
+            <path
+              d="M6 21c-.567 0-1.042-.192-1.425-.575C4.192 20.042 4 19.567 4 19v-2h3V3.375l1.275.9 1.3-.9 1.3.9 1.325-.9 1.3.9 1.3-.9 1.325.9 1.3-.9 1.3.9 1.275-.9V19c0 .567-.192 1.042-.575 1.425-.383.383-.858.575-1.425.575H6zm12-1c.283 0 .52-.096.712-.288A.965.965 0 0019 19V5H8v12h9v2c0 .283.096.52.288.712A.965.965 0 0018 20zM9.375 8.5v-1h5.35v1h-5.35zm0 3v-1h5.35v1h-5.35zm7.5-2.725c-.2 0-.375-.08-.525-.238A.76.76 0 0116.125 8c0-.2.075-.38.225-.538a.73.73 0 011.075 0c.15.159.225.338.225.538a.76.76 0 01-.225.537.728.728 0 01-.55.238zm0 3c-.2 0-.375-.08-.525-.238a.76.76 0 01-.225-.537c0-.2.075-.38.225-.538a.73.73 0 011.075 0c.15.159.225.338.225.538a.76.76 0 01-.225.537.728.728 0 01-.55.238z"
+              fill="url(#paint0_linear_13117_632)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_13117_632"
+              x1={4.8}
+              y1={3.375}
+              x2={20.2687}
+              y2={19.5158}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#5C6670" />
+              <stop offset={1} stopColor="#131316" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    }
+
+    export function LinkIcon(props: any) {
+      return (
+        <svg
+          width={40}
+          height={40}
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <g
+            style={{
+              mixBlendMode: "luminosity"
+            }}
+          >
+            <path
+              d="M20.507 20.9h-4c-2.35 0-4.25-1.9-4.25-4.25v-.4c0-2.35 1.9-4.25 4.25-4.25h4c2.35 0 4.25 1.9 4.25 4.25v.4a4.26 4.26 0 01-4.25 4.25z"
+              stroke="url(#paint0_linear_13117_1447)"
+              strokeWidth={2.7}
+              strokeMiterlimit={10}
+            />
+            <path
+              d="M24.777 24.9h-4c-2.35 0-4.25-1.9-4.25-4.25v-.4c0-2.35 1.9-4.25 4.25-4.25h4c2.35 0 4.25 1.9 4.25 4.25v.4c0 2.35-1.9 4.25-4.25 4.25z"
+              stroke="url(#paint1_linear_13117_1447)"
+              strokeWidth={2.7}
+              strokeMiterlimit={10}
+            />
+            <path
+              d="M13.457 26.6l-.25.39c-.06.1-.18.13-.27.07l-1.28-.76c-.1-.06-.13-.18-.07-.27l.25-.39c.06-.1.03-.22-.07-.27l-.67-.39a.206.206 0 010-.35l3.34-1.88c.14-.08.3.02.3.18l-.04 3.84c0 .15-.17.25-.3.17l-.67-.39c-.08-.08-.21-.04-.27.05z"
+              fill="url(#paint2_linear_13117_1447)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_13117_1447"
+              x1={10.8982}
+              y1={16.4454}
+              x2={26.1055}
+              y2={16.4454}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#870FFF" />
+              <stop offset={1} stopColor="#E7CFFF" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_13117_1447"
+              x1={15.1692}
+              y1={20.4546}
+              x2={30.3765}
+              y2={20.4546}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FFDDCD" />
+              <stop offset={1} stopColor="#FF5403" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_13117_1447"
+              x1={11.6639}
+              y1={23.6385}
+              x2={15.3095}
+              y2={25.8092}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FCFF1C" />
+              <stop offset={1} stopColor="#FF9D0A" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    }
+
+    export function AppBarIcon(props: any) {
+      return (
+        <svg
+          width={40}
+          height={40}
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <g
+            style={{
+              mixBlendMode: "luminosity"
+            }}
+          >
+            <path
+              d="M28.52 14.65v14.4c0 .58-.47 1.05-1.05 1.05H17.29c-.58 0-1.05-.47-1.05-1.05v-.89l9.1-3.44c.36-.14.6-.48.6-.87V13.6h1.53c.58 0 1.05.47 1.05 1.05z"
+              fill="url(#paint0_linear_13117_1464)"
+            />
+            <path
+              d="M25.94 13.6v10.26c0 .39-.24.73-.6.87l-9.1 3.44V14.65c0-.58.47-1.05 1.05-1.05h8.65z"
+              fill="url(#paint1_linear_13117_1464)"
+            />
+            <path
+              d="M25.94 10.93v2.67h-8.65c-.58 0-1.05.47-1.05 1.05v13.52l-3.5 1.32a.93.93 0 01-1.26-.87v-17.7c0-.51.42-.93.93-.93h12.6c.51.01.93.43.93.94z"
+              fill="url(#paint2_linear_13117_1464)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_13117_1464"
+              x1={16.2422}
+              y1={21.8522}
+              x2={28.5182}
+              y2={21.8522}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FCFF1C" />
+              <stop offset={1} stopColor="#FF9D0A" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_13117_1464"
+              x1={16.2422}
+              y1={20.8857}
+              x2={25.9372}
+              y2={20.8857}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FFDDCD" />
+              <stop offset={1} stopColor="#FF5403" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_13117_1464"
+              x1={11.482}
+              y1={19.7778}
+              x2={25.937}
+              y2={19.7778}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#E7CFFF" />
+              <stop offset={1} stopColor="#870FFF" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    }
+
+    export function InvoiceIcon(props: any) {
+      return (
+        <svg
+          width={40}
+          height={40}
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <g
+            style={{
+              mixBlendMode: "luminosity"
+            }}
+          >
+            <path
+              d="M23.84 12.925v6.1c0 .39-.31.7-.7.7h-5.16c-.39 0-.7-.31-.7-.7v-.97h-4.3c-.39 0-.7-.31-.7-.7v-6.1c0-.39.31-.7.7-.7h5.16c.39 0 .7.31.7.7v.97h4.3c.38 0 .7.32.7.7z"
+              fill="url(#paint0_linear_13117_1458)"
+            />
+            <path
+              d="M19.59 22.185H10.7c-.39 0-.7-.31-.7-.7v-6.93c0-.39.31-.7.7-.7h8.89c.39 0 .7.31.7.7v6.93c0 .39-.31.7-.7.7z"
+              fill="url(#paint1_linear_13117_1458)"
+            />
+            <path
+              d="M29.3 29.445H10.7c-.39 0-.7-.31-.7-.7v-12.27c0-.39.31-.7.7-.7h18.6c.39 0 .7.31.7.7v12.27c0 .39-.31.7-.7.7z"
+              fill="url(#paint2_linear_13117_1458)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_13117_1458"
+              x1={12.2755}
+              y1={15.1424}
+              x2={23.8365}
+              y2={15.1424}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FCFF1C" />
+              <stop offset={1} stopColor="#FF9D0A" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_13117_1458"
+              x1={10}
+              y1={18.0223}
+              x2={20.293}
+              y2={18.0223}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#E7CFFF" />
+              <stop offset={1} stopColor="#870FFF" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_13117_1458"
+              x1={10}
+              y1={22.6143}
+              x2={30}
+              y2={22.6143}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#03FFE5" />
+              <stop offset={1} stopColor="#14B348" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    }
+
+    export function StoreIcon(props: any) {
+      return (
+        <svg
+          width={40}
+          height={40}
+          viewBox="0 0 40 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <g
+            style={{
+              mixBlendMode: "luminosity"
+            }}
+          >
+            <path
+              d="M27 30.06H12.98c-.35 0-.64-.28-.64-.64V15.4c0-.35.28-.64.64-.64H27c.35 0 .64.28.64.64v14.02c0 .35-.29.64-.64.64z"
+              fill="url(#paint0_linear_13117_1452)"
+            />
+            <path
+              d="M28.46 23.72l-12.87-10.5c-.46-.38-.2-1.13.4-1.13h12.87c.35 0 .64.28.64.64v10.51c0 .53-.62.82-1.04.48z"
+              fill="url(#paint1_linear_13117_1452)"
+            />
+            <path
+              d="M11.54 21.58l12.87-10.51c.46-.38.2-1.13-.4-1.13H11.14c-.35 0-.64.28-.64.64v10.51c0 .53.62.83 1.04.49z"
+              fill="url(#paint2_linear_13117_1452)"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_13117_1452"
+              x1={12.3418}
+              y1={22.4112}
+              x2={27.6375}
+              y2={22.4112}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FF9868" />
+              <stop offset={1} stopColor="#FF5403" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_13117_1452"
+              x1={15.3529}
+              y1={17.9792}
+              x2={29.5002}
+              y2={17.9792}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#03FFE5" />
+              <stop offset={1} stopColor="#14B348" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_13117_1452"
+              x1={10.5}
+              y1={15.8319}
+              x2={24.6472}
+              y2={15.8319}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#FCFF1C" />
+              <stop offset={1} stopColor="#FF9D0A" />
+            </linearGradient>
+          </defs>
+        </svg>
+      )
+    }

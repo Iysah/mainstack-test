@@ -89,6 +89,11 @@ const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = tr
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
             className="absolute z-50 w-full mt-2 bg-white rounded-[20px] shadow-lg p-4 min-w-[470px]"
+            style={{
+              top: 'auto',
+              bottom: 'auto',
+              marginBottom: 'auto'
+            }}
           >
             <div className="flex items-center justify-between mb-4">
               <button
