@@ -20,6 +20,8 @@ const Dashboard = () => {
   const [selectedTransactionTypes, setSelectedTransactionTypes] = useState<string[]>([]);
   const [selectedTransactionStatus, setSelectedTransactionStatus] = useState<string[]>([]);
 
+  console.log(user)
+
   const applyFilters = () => {
     let filtered = [...transactions];
 
