@@ -1,54 +1,78 @@
-# React + TypeScript + Vite
+# Mainstack Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive dashboard application built with React and TypeScript, featuring transaction management, analytics visualization, and user profile management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Dashboard**: Real-time visualization of transaction data and analytics
+- **Transaction Management**: View and filter transactions by date, status, and type
+- **User Profile**: Manage user information and settings
+- **Responsive Design**: Fully responsive layout that works on desktop and mobile devices
+- **Modern UI**: Clean and intuitive interface built with TailwindCSS
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: TailwindCSS
+- **Testing**: Jest and React Testing Library
+- **State Management**: React Context API
+- **Code Quality**: ESLint, TypeScript-ESLint
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/Iysah/mainstack-test.git
+   cd mainstack-test
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open your browser and visit `http://localhost:5173`
+
+### Running Tests
+
+```bash
+npm test
+# or
+yarn test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Best Practices Implemented
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Component Architecture**: Modular and reusable components
+- **TypeScript**: Strong typing for better code quality and maintainability
+- **Testing**: Unit and integration tests for critical components
+- **Responsive Design**: Mobile-first approach
+- **Code Quality**: ESLint and TypeScript-ESLint for consistent code style
+- **Git Workflow**: Proper commit messages and branch management
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Project Structure
+
+```
+src/
+  ├── components/     # Reusable UI components
+  ├── services/       # API and other services
+  ├── assets/         # Static assets (images, fonts)
+  └── __tests__/      # Test files
 ```

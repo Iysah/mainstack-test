@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Grid,
@@ -12,9 +12,23 @@ import {
   LogOut
 } from 'lucide-react';
 import { AnalyticsIcon, AppBarIcon, AppIcon, CRMIcon, HomeIcon, InvoiceIcon, LinkIcon, MainStackLogo, MenuIcon, RevenueIcon, StoreIcon } from '../assets/icons';
+import { getUser, User } from '../services/api';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await getUser();
+        setUser(userData);
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -75,7 +89,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="flex items-center gap-2 p-2 pr-4 bg-[#EFF1F6] rounded-full "
             >
                 <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white">
-                OJ
+                  {user ? `${user.first_name[0]}${user.last_name[0]}` : 'OJ'}
                 </div>
                 <MenuIcon />
             </button>
@@ -88,11 +102,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <div className="px-4 pt-2">
                     <div className="flex items-center justify-start gap-4">
                         <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white">
-                        OJ
+                          {user ? `${user.first_name[0]}${user.last_name[0]}` : 'OJ'}
                         </div>
                         <div>
-                            <div className="font-medium">Olivier Jones</div>
-                            <div className="text-sm text-gray-600">olivierjones@email.com</div>
+                            <div className="font-medium">{user ? `${user.first_name} ${user.last_name}` : 'Loading...'}</div>
+                            <div className="text-sm text-gray-600">{user?.email || 'Loading...'}</div>
                         </div>
                     </div>
                 </div>
