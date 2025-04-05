@@ -58,7 +58,14 @@ const Dashboard = () => {
     );
   };
 
-  console.log(user)
+  // Function to calculate the total number of active filters
+  const getActiveFilterCount = () => {
+    let count = 0;
+    if (startDate && endDate) count += 1; // Date range counts as one filter
+    count += selectedTransactionTypes.length;
+    count += selectedTransactionStatus.length;
+    return count;
+  };
 
   const clearFilters = () => {
     setStartDate(null);
@@ -177,6 +184,11 @@ const Dashboard = () => {
                 className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#EFF1F6] font-semibold"
               >
                 Filter
+                {getActiveFilterCount() > 0 && (
+                  <p className='w-8 h-8 rounded-full flex items-center justify-center bg-[#131316] text-white text-xs'>
+                    {getActiveFilterCount()}
+                  </p>
+                )}
                 <ChevronDown size={18} />
               </button>
               {isFilterOpen && (
