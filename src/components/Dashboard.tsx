@@ -49,6 +49,15 @@ const Dashboard = () => {
     setIsFilterOpen(false);
   };
 
+  // Function to check if any filters are applied
+  const isAnyFilterApplied = () => {
+    return (
+      (startDate && endDate) || 
+      selectedTransactionTypes.length > 0 || 
+      selectedTransactionStatus.length > 0
+    );
+  };
+
   console.log(user)
 
   const clearFilters = () => {
@@ -182,7 +191,7 @@ const Dashboard = () => {
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}
                     transition={{ type: "spring", damping: 20 }}
-                    className="fixed top-5 right-5 h-[95vh] w-[520px] rounded-lg bg-white shadow-lg p-6 "
+                    className="fixed top-5 right-5 h-[95vh] w-[520px] rounded-lg bg-white shadow-lg p-6"
                   >
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-xl font-semibold">Filter</h2>
@@ -254,13 +263,14 @@ const Dashboard = () => {
                       <div className="flex items-center gap-3">
                         <button 
                           onClick={clearFilters}
-                          className="flex-1 px-6 py-3 border rounded-full hover:bg-gray-50"
+                          className="flex-1 px-6 py-3 border rounded-full font-semibold hover:bg-gray-50"
                         >
                           Clear
                         </button>
                         <button 
                           onClick={applyFilters}
-                          className="flex-1 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-900"
+                          disabled={!isAnyFilterApplied()}
+                          className={`flex-1 px-6 py-3 rounded-full ${isAnyFilterApplied() ? 'bg-black text-white hover:bg-gray-900' : 'bg-[#DBDEE5] text-gray-500 cursor-not-allowed'}`}
                         >
                           Apply
                         </button>
@@ -293,7 +303,7 @@ const Dashboard = () => {
                 </tr>
               ) : filteredTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={2} className="py-12 text-start">
+                  <td colSpan={2} className="py-12 text-start flex justify-center">
                     <div className="flex flex-col justify-start items-start gap-4">
                       <div className="w-12 h-12 rounded-lg bg-[#EFF1F6] flex items-center justify-center">
                         <ReceiptIcon />

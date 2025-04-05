@@ -48,7 +48,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </nav>
       </aside>
       
-      <header className="fixed top-10 left-[50px] right-10 bg-white shadow-md rounded-full ">
+      <header className="fixed top-10 left-[50px] right-10 bg-white shadow-md rounded-full Z-10">
         <div className="flex items-center justify-between px-8 py-4">
           <div className="text-2xl font-bold">
                 <MainStackLogo />
