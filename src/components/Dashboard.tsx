@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { ChevronDown, Download, Filter, Info, MoveDownLeft, MoveUpRight, Receipt } from 'lucide-react';
+import { ChevronDown, Download, Info, MoveDownLeft, MoveUpRight} from 'lucide-react';
 import DatePicker from './DatePicker';
 import MultiSelect from './MultiSelect';
 import { getUser, getWallet, getTransactions, type User, type Wallet, type Transaction } from '../services/api';
@@ -48,6 +48,8 @@ const Dashboard = () => {
     setFilteredTransactions(filtered);
     setIsFilterOpen(false);
   };
+
+  console.log(user)
 
   const clearFilters = () => {
     setStartDate(null);

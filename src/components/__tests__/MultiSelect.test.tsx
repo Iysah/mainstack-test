@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import MultiSelect from '../MultiSelect';
 
 // Mock framer-motion to avoid animation-related issues in tests

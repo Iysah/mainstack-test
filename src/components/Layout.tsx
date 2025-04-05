@@ -4,7 +4,6 @@ import {
   Grid,
   Bell,
   MessageSquare,
-  ChevronDown,
   Settings,
   FileText,
   Share2,
