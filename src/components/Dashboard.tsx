@@ -236,6 +236,7 @@ const Dashboard = () => {
                             onChange={setEndDate}
                             placeholder="17 Aug 2025"
                             isStart={false}
+                            isEndDate={true}
                           />
                         </div>
                       </div>

@@ -7,9 +7,10 @@ interface DatePickerProps {
   onChange: (date: Date) => void;
   placeholder?: string;
   isStart?: boolean;
+  isEndDate?: boolean;
 }
 
-const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = true }: DatePickerProps) => {
+const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = true, isEndDate = false }: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(value || new Date());
 
@@ -87,12 +88,14 @@ const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = tr
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3 }}
             className="absolute z-50 w-full mt-2 bg-white rounded-[20px] shadow-lg p-4 min-w-[470px]"
             style={{
               top: 'auto',
               bottom: 'auto',
-              marginBottom: 'auto'
+              marginBottom: 'auto',
+              right: isEndDate ? 0 : 'auto',
+              transform: isEndDate ? 'translateX(0)' : 'none'
             }}
           >
             <div className="flex items-center justify-between mb-4">
