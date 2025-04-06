@@ -73,18 +73,20 @@ const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = tr
   return (
     <div className="relative">
       <button
+      data-testid="datepicker-button"
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full p-3 ${isOpen ? 'bg-white border-2 border-black' : 'bg-[#EFF1F6]'} rounded-[14px] flex items-center justify-between text-left`}
       >
         <span className={value ? 'text-black' : 'text-gray-400'}>
           {value ? formatDate(value) : placeholder}
         </span>
-        {isStart ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        {isStart ? <ChevronUp size={20} data-testid="chevron-up" /> : <ChevronDown size={20} data-testid="chevron-down" />}
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
+          data-testid="calendar"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -100,6 +102,7 @@ const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = tr
           >
             <div className="flex items-center justify-between mb-4">
               <button
+              data-testid="prev-month"
                 onClick={() => navigateMonth('prev')}
                 className="p-1 hover:bg-gray-100 rounded-full"
               >
@@ -109,6 +112,7 @@ const DatePicker = ({ value, onChange, placeholder = 'Select date', isStart = tr
                 {months[currentDate.getMonth()]}, {currentDate.getFullYear()}
               </h2>
               <button
+              data-testid="next-month"
                 onClick={() => navigateMonth('next')}
                 className="p-1 hover:bg-gray-100 rounded-full"
               >

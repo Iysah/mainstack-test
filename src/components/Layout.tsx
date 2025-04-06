@@ -50,7 +50,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       
       <header className="fixed top-10 left-[50px] right-10 bg-white shadow-md rounded-full Z-10">
         <div className="flex items-center justify-between px-8 py-4">
-          <div className="text-2xl font-bold">
+          <div className="text-2xl font-bold" data-testid="main-logo">
                 <MainStackLogo />
           </div>
           <nav className="flex items-center gap-2">
@@ -86,6 +86,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
                 className="flex items-center gap-2 p-2 pr-4 bg-[#EFF1F6] rounded-full "
+                aria-label="Profile Menu"
             >
                 <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center text-white">
                   {user ? `${user.first_name[0]}${user.last_name[0]}` : 'OJ'}
