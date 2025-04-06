@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import Layout from '../Layout';
 import { getUser } from '../../services/api';
 
@@ -96,6 +96,61 @@ describe('Layout Component', () => {
 
     // Click again to close dropdown
     fireEvent.click(profileButton);
+    await waitFor(() => {
+      expect(screen.queryByText('Settings')).not.toBeInTheDocument();
+    });
+  });
+
+  it('shows loading state before user data is fetched', async () => {
+    let resolveUser: (value: any) => void;
+    (getUser as jest.Mock).mockImplementation(
+      () => new Promise((resolve) => {
+        resolveUser = resolve;
+      })
+    );
+
+    render(
+      <Layout>
+        <div>Test Content</div>
+      </Layout>
+    );
+
+    // Check loading state
+    expect(screen.getByText('OJ')).toBeInTheDocument();
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+
+    // Resolve user data
+    await act(async () => {
+      resolveUser!(mockUser);
+    });
+
+    // Verify loading state is replaced with user data
+    expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+    expect(screen.getByText('JD')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+  });
+
+  it('handles profile dropdown keyboard interactions', async () => {
+    (getUser as jest.Mock).mockResolvedValue(mockUser);
+
+    render(
+      <Layout>
+        <div>Test Content</div>
+      </Layout>
+    );
+
+    await waitFor(() => {
+      expect(getUser).toHaveBeenCalled();
+    });
+
+    const profileButton = screen.getByText('JD');
+    
+    // Test keyboard interaction
+    fireEvent.keyDown(profileButton, { key: 'Enter' });
+    expect(screen.getByText('Settings')).toBeInTheDocument();
+
+    // Test clicking outside to close
+    fireEvent.click(document.body);
     await waitFor(() => {
       expect(screen.queryByText('Settings')).not.toBeInTheDocument();
     });
